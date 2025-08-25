@@ -279,7 +279,7 @@ const fetchUserAppliedApplications = async (req, res) => {
     
     return res.status(200).json({message:'Applied jobs by User',jobsUserApplied});
   } catch (err) {
-    console.error(err);
+    
     return res.status(500).json({ message: "Server error" });
   }
 };
@@ -383,7 +383,9 @@ transporter.sendMail(mailOptions, (error, info) => {
 }
 
 const fetchSearchJobs = async (req, res) => {
-  let search = req.query.search;
+  
+  let {search} = req.query;
+  console.log(search,'search')
   search = String(search);
 
   try {
@@ -635,11 +637,11 @@ const fetchUserInterviewScheduled = async (req, res) => {
         }  
     ])
 
-    console.log(InterviewScheduled, "Interview");
+    
     return res.json(InterviewScheduled);
 
   } catch (err) {
-    console.error(err);
+  
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 };
@@ -689,11 +691,11 @@ const fetchRejected = async(req,res)=>{
         }  
     ])
 
-    console.log(Rejected, "Interview");
+    
     return res.json(Rejected);
 
   } catch (err) {
-    console.error(err);
+
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 
@@ -744,11 +746,11 @@ const fetchSelected = async(req,res)=>{
         }  
     ])
 
-    console.log(Selected, "Interview");
+
     return res.json(Selected);
 
   } catch (err) {
-    console.error(err);
+    
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 
@@ -798,11 +800,11 @@ try {
         }  
     ])
 
-    console.log(UnderReview, "Interview");
+  
     return res.json(UnderReview);
 
   } catch (err) {
-    console.error(err);
+
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 
@@ -853,11 +855,11 @@ const fetchShortlisted = async(req,res)=>{
         }  
     ])
 
-    console.log(Shortlisted, "Interview");
+    
     return res.json(Shortlisted);
 
   } catch (err) {
-    console.error(err);
+    
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 }
