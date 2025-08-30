@@ -20,11 +20,14 @@ It provides REST APIs for authentication, data storage, and other business logic
 - JWT Authentication
 - bcrypt.js (for password hashing)
 
+# Related Repositories
+
+- [Frontend Repo](https://github.com/ayushrai26/JobTracker_frontend)
 
 ## ⚙️ Installation
-```bash
 # Clone the repo
 git clone https://github.com/ayushrai26/JObTracker_backend.git
+
 cd backend
 
 # Install dependencies
@@ -34,7 +37,7 @@ npm install
 npm run dev
 
 
-```
+
 # Folder Structure
 ```
  backend
@@ -58,8 +61,6 @@ npm run dev
 │  │  ├─ uploads.js
 │  │  └─ users.js
 │  └─ server.js
-```
 
-# Related Repositories
-```
-- [Frontend Repo](https://github.com/ayushrai26/JobTracker_frontend)
+
+
