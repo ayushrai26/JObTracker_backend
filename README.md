@@ -1,6 +1,7 @@
 # JOB TRACKER APPLICATION - BACKEND
 
-#🚀 About
+# 🚀 About 
+
 This is the Backend of JOb Tracker Application, built with Node(Express.js).
 It provides REST APIs for authentication, data storage, and other business logic.
 
