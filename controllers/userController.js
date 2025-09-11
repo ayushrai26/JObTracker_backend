@@ -264,7 +264,7 @@ const fetchUserAppliedApplications = async (req, res) => {
   try {
   const user= req.user;
   console.log(user,'useronfetch')
-  const userId = user.userId
+  const userId = user.id
   console.log(userId,'userId')
   
     const jobsUserApplied = await appliedApplication.aggregate([
