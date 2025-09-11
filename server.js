@@ -1,3 +1,4 @@
+console.log("🚀 server.js starting up...");
 const express = require('express')
 const userRoutes = require('./routes/users')
 const multer = require('multer')
@@ -14,10 +15,7 @@ app.use(express.json())
 app.use('/upload',upload)
 app.use('/',userRoutes)
 app.use('/admin',adminRoutes)
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB connected"))
 .catch((err) => console.log(err));
 app.listen(PORT,()=>

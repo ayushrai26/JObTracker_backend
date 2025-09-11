@@ -48,8 +48,20 @@ const loginUser = async(req,res)=>{
    const token = jwt.sign(
     {id:userExist._id,role:userExist.role},
     process.env.JWT_SECRET,
-    {expiresIn:'4h'}
+    {expiresIn:'15m'}
    )
+   const Refresh_token = jwt.sign(
+    {id:userExist._id,role:userExist.role},
+    process.env.REFRESH_TOKEN,
+    {expiresIn:'7d'}
+   )
+   res.cookie("refresh_token",Refresh_token,{
+    httpOnly:true,
+    secure:true,
+    sameSite:'Strict',
+    maxAge:7*24*60*60*1000
+
+   });
    return res.status(200).json({message:'Login Successfull',token,user:{
     id:userExist._id,
     email:userExist.email,
@@ -250,26 +262,35 @@ const saveUserAppliedApplications = async(req,res)=>{
 
 const fetchUserAppliedApplications = async (req, res) => {
   try {
-  
+  const user= req.user;
+  console.log(user,'useronfetch')
+  const userId = user.userId
+  console.log(userId,'userId')
   
     const jobsUserApplied = await appliedApplication.aggregate([
-  {
-    $lookup: {
-      from: "newjobs",
-      let: { jobIdStr: "$jobId" }, // jobId from appliedApplication
-      pipeline: [
-        {
-          $match: {
-            $expr: {
-              $eq: ["$_id", { $toObjectId: "$$jobIdStr" }] // convert string → ObjectId
+      {
+         $match:{
+        userId:userId
+      }
+      },
+      {
+        $lookup: {
+          from: "newjobs",
+          let: { jobIdStr: "$jobId" },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: ["$_id", { $toObjectId: "$$jobIdStr" }]
+                }
+              }
             }
-          }
+          ],
+          as: "JobsUserApplied"
         }
-      ],
-      as: "JobsUserApplied"
-    }
-  }
-]);
+      }
+      
+    ])
 
     
     
